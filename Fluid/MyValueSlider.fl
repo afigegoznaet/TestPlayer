@@ -1,0 +1,75 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include "PlayerGUI_prot.h"} {public local
+} 
+
+decl {\#include <FL/Fl_Slider.H>} {public local
+} 
+
+decl {\#include <FL/Fl_Value_Output.H>} {public local
+} 
+
+decl {\#include "../mad_parser.h"} {private global
+} 
+
+class MyValueSlider {open : {public Fl_Slider}
+} {
+  Function {MyValueSlider(int x,int y,int w,int h,const char*l=0):Fl_Slider(x,y,w,h,l)} {open
+  } {
+    code {Fl_Group *save = Fl_Group::current();   // save current widget..
+Fl_Group::current(save);                // ..then back to previous.} {}
+  }
+  Function {handle(int e)} {open return_type int
+  } {
+    code {switch(e) {
+              case FL_PUSH:
+                  ((data_buffer*) this->playback_data)->slider_in_use=true;
+                  break;
+              case FL_HIDE:       // valuator goes away
+              	((data_buffer*) this->playback_data)->slider_in_use=false;
+              	break;
+              case FL_RELEASE:    // release mouse
+              	((data_buffer*) this->playback_data)->slider_in_use=false;
+              	break;
+              case FL_LEAVE:      // leave focus
+                  ((data_buffer*) this->playback_data)->slider_in_use=false;
+                  break;
+              case FL_DRAG:
+              	((data_buffer*) this->playback_data)->slider_in_use=true;
+              	break;
+          }
+          return(Fl_Slider::handle(e));} {}
+  }
+  decl {void* playback_data;} {private local
+  }
+  Function {set_mad(void* playback_data)} {open return_type void
+  } {
+    code {this->playback_data=playback_data;} {}
+  }
+} 
+
+class Fl_Time_Output {open : {public Fl_Value_Output}
+} {
+  Function {Fl_Time_Output(int X, int Y, int W, int H, const char *L = 0) : Fl_Value_Output(X, Y, W, H, L)} {open
+  } {
+    code {} {selected
+    }
+  }
+  Function {format(char *buffer)} {open return_type int
+  } {
+    code {double v = value();                // value() is assumed to be in milliseconds
+			int h = v / 3600;            // hours
+			v -= (h*3600);
+			int m = v / 60;                      // minutes
+			v -= (m*60);
+			int s = v;                       // seconds
+			int ms = 1000*(v-(s));            // milliseconds
+			// ARB: 128 since that is what is hardcoded in Fl_Valuator/Fl_Value_ etc
+			if(h>0)
+				return snprintf(buffer, 128, "%02d:%02d:%02d.%03d", h, m, s, ms);
+			else
+				return snprintf(buffer, 128, "%02d:%02d.%03d", m, s, ms);} {}
+  }
+} 

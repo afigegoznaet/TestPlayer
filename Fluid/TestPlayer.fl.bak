@@ -1,0 +1,168 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include "PlayerGUI_prot.h"} {public local
+} 
+
+decl {\#include <sndfile.h>} {public local
+} 
+
+decl {\#include "MyValueSlider.h"} {public local
+} 
+
+class TestPlayerGui {open
+} {
+  Function {TestPlayerGui()} {open
+  } {
+    Fl_Window MainWindow {
+      label {Test Player} open selected
+      tooltip {Test Player} xywh {397 118 728 395} type Double box UP_BOX color 55 selection_color 61 labelfont 8 align 80 resizable visible
+    } {
+      Fl_Menu_Bar {} {
+        label Menu open
+        xywh {5 5 720 25} down_box DOWN_BOX labeltype ENGRAVED_LABEL labelfont 8
+      } {
+        Submenu {} {
+          label {&File} open
+          xywh {0 0 150 20} labeltype EMBOSSED_LABEL
+        } {
+          MenuItem {} {
+            label {&Open}
+            callback {load(this);}
+            xywh {0 0 150 20} labeltype ENGRAVED_LABEL labelfont 8
+          }
+          MenuItem {} {
+            label {&Exit}
+            callback {MainWindow->hide();}
+            xywh {0 0 30 20} labeltype ENGRAVED_LABEL
+          }
+        }
+      }
+      Fl_Group {} {
+        label {           User settings} open
+        xywh {0 50 728 345} labeltype ENGRAVED_LABEL align 5 when 1 resizable
+      } {
+        Fl_Group {} {
+          label {Text Fields} open
+          xywh {4 55 626 100} labeltype NO_LABEL
+        } {
+          Fl_Output fileName {
+            label File
+            callback {setFileName(this);}
+            tooltip {The name of the open file} xywh {43 61 582 24} color 55 labeltype ENGRAVED_LABEL
+          }
+          Fl_Group {} {
+            label {File props} open
+            xywh {5 105 625 50} color 55 selection_color 55 labeltype NO_LABEL resizable
+          } {
+            Fl_Value_Input currentPos {
+              label {Current position}
+              callback {setpos(this,TXTPOS)}
+              tooltip {Current Position in File} xywh {120 110 85 24} color 55 labeltype ENGRAVED_LABEL
+              class Fl_Time_Output
+            }
+            Fl_Value_Output duration {
+              label Duration
+              tooltip {Current Position in File} xywh {333 110 85 24} color 55 selection_color 55 labeltype ENGRAVED_LABEL
+              class Fl_Time_Output
+            }
+            Fl_Value_Output remaining {
+              label Remaining
+              tooltip {Current Position in File} xywh {539 109 85 24} color 55 labeltype ENGRAVED_LABEL
+              class Fl_Time_Output
+            }
+          }
+        }
+        Fl_Slider slider {
+          label {slider:}
+          callback {setpos(this, SLID);}
+          tooltip {Set Playing duration in secs} xywh {15 140 495 20} type {Horz Knob} color 23 selection_color 1 labeltype NO_LABEL labelcolor 4 align 1 when 4
+          class MyValueSlider
+        }
+        Fl_Group {} {
+          label Buttons open
+          tooltip Controls xywh {15 170 495 90} labeltype NO_LABEL resizable
+        } {
+          Fl_Button rewBut {
+            label {@<<}
+            callback {rew(this);}
+            tooltip Rewind xywh {16 170 60 22} down_box DOWN_BOX
+          }
+          Fl_Button startBut {
+            label {@>}
+            callback {play(this);}
+            tooltip Play xywh {79 170 120 22} down_box DOWN_BOX
+          }
+          Fl_Button stopBut {
+            label {@square}
+            callback {stop(this);}
+            tooltip Stop xywh {202 170 80 22} down_box DOWN_BOX labeltype EMBOSSED_LABEL
+          }
+          Fl_Button ffBut {
+            label {@>>}
+            callback {ff(this);}
+            tooltip {Fast Forward} xywh {285 170 60 22} down_box DOWN_BOX
+          }
+          Fl_Group {} {open
+            xywh {40 195 470 65} resizable
+          } {}
+        }
+        Fl_Slider volumeSlider {
+          label {volume:}
+          callback {setVolume(this);}
+          xywh {644 60 25 315} type {Vert Knob} box GTK_THIN_DOWN_BOX color 23 selection_color 63 minimum 1 maximum 0 step 0.01 value 1
+        }
+      }
+      Fl_Group {} {
+        label {Empty Spaces} open
+        xywh {0 225 635 155} labeltype NO_LABEL
+      } {}
+    }
+    code {isPlaying = false;
+isStopped = false;
+filename[0] = '\\0';
+fc = new Fl_File_Chooser(".", "*", Fl_File_Chooser::SINGLE, "Open Audio File");
+libToUse=0;
+  FILE* iniFile;
+  iniFile = fopen("./settings.ini","r");
+  if(iniFile)
+	fread(currDir, 1024, 1,iniFile);
+	else
+		memset(currDir, 0, 1024);
+  fclose(iniFile);} {}
+  }
+  Function {~TestPlayerGui()} {open
+  } {
+    code {delete fc;} {}
+  }
+  Function {show()} {open
+  } {
+    code {MainWindow->show();} {}
+  }
+  decl {bool isPlaying;} {public local
+  }
+  decl {bool isStopped;} {public local
+  }
+  decl {char filename[256];} {public local
+  }
+  decl {Fl_File_Chooser *fc;} {public local
+  }
+  decl {double ffStep;} {public local
+  }
+  decl {SNDFILE *fin;} {public local
+  }
+  decl {SF_INFO input_info;} {public local
+  }
+  decl {short libToUse;} {public local
+  }
+  decl {unsigned long length;} {public local
+  }
+  decl {char currDir[1024];} {public local
+  }
+  Function {setMad(void* playback_data)} {open return_type void
+  } {
+    code {MainWindow->setMad(playback_data);
+slider->setMad(playback_data);} {}
+  }
+} 

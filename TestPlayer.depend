@@ -1,0 +1,354 @@
+# depslib dependency file v1.0
+1454064236 source:d:\workspace\testplayer\main.cpp
+	<iostream>
+	"Fluid/TestPlayer.h"
+	<FL/x.H>
+	<sndfile.h>
+	<mad.h>
+	"threads.h"
+	<portaudio.h>
+	"mman.h"
+	<math.h>
+	"mad_parser.h"
+	"unistd.h"
+	<fftw3.h>
+	<limits.h>
+	"filters.h"
+
+1450556853 d:\workspace\testplayer\main.h
+	<FL/Fl.H>
+	<FL/Fl_Double_Window.H>
+	<FL/Fl_Input.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Return_Button.H>
+
+1450199672 d:\include\fl\fl.h
+	<FL/Fl_Cairo.H>
+	"fl_utf8.h"
+	"Enumerations.H"
+
+1450199672 d:\include\fl\fl_cairo.h
+	<FL/Fl_Export.H>
+	<cairo-xlib.h>
+	<cairo-win32.h>
+	<cairo-quartz.h>
+
+1450199673 d:\include\fl\fl_export.h
+
+1450199678 d:\include\fl\fl_utf8.h
+	"Fl_Export.H"
+	"fl_types.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<locale.h>
+	<ctype.h>
+	<wchar.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<X11/Xlocale.h>
+	<X11/Xlib.h>
+	<locale.h>
+
+1450199678 d:\include\fl\fl_types.h
+
+1450199672 d:\include\fl\enumerations.h
+	"Fl_Export.H"
+	"fl_types.h"
+
+1450199673 d:\include\fl\fl_double_window.h
+	"Fl_Window.H"
+
+1450199678 d:\include\fl\fl_window.h
+	<windows.h>
+	"Fl_Group.H"
+	"Fl_Bitmap.H"
+	<stdlib.h>
+
+1450199674 d:\include\fl\fl_group.h
+	"Fl_Widget.H"
+
+1450199678 d:\include\fl\fl_widget.h
+	"Enumerations.H"
+	<stdint.h>
+	<stddef.h>
+
+1450199672 d:\include\fl\fl_bitmap.h
+	"Fl_Image.H"
+
+1450199674 d:\include\fl\fl_image.h
+	"Enumerations.H"
+	<stdlib.h>
+
+1450199674 d:\include\fl\fl_input.h
+	"Fl_Input_.H"
+
+1450199674 d:\include\fl\fl_input_.h
+	"Fl_Widget.H"
+
+1450199672 d:\include\fl\fl_button.h
+	"Fl_Widget.H"
+
+1450199676 d:\include\fl\fl_return_button.h
+	"Fl_Button.H"
+
+1454064170 d:\workspace\testplayer\fluid\testplayer.h
+	<FL/Fl.H>
+	<FL/Fl_Chart.H>
+	"PlayerGUI_prot.h"
+	<sndfile.h>
+	"MyValueSlider.h"
+	<FL/Fl_Double_Window.H>
+	<FL/Fl_Menu_Bar.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Slider.H>
+	<FL/Fl_Box.H>
+	<FL/Fl_Scrollbar.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Text_Display.H>
+	<FL/Fl_Choice.H>
+
+1453175845 d:\workspace\testplayer\fluid\playergui_prot.h
+	<FL/Fl_File_Chooser.H>
+	"../filters.h"
+
+1450199673 d:\include\fl\fl_file_chooser.h
+	<FL/Fl.H>
+	<FL/Fl_Double_Window.H>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<FL/Fl_Group.H>
+	<FL/Fl_Choice.H>
+	<FL/Fl_Menu_Button.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Preferences.H>
+	<FL/Fl_Tile.H>
+	<FL/Fl_File_Browser.H>
+	<FL/Fl_Box.H>
+	<FL/Fl_Check_Button.H>
+	<FL/Fl_File_Input.H>
+	<FL/Fl_Return_Button.H>
+	<FL/fl_ask.H>
+
+1450199673 d:\include\fl\fl_choice.h
+	"Fl_Menu_.H"
+
+1450199674 d:\include\fl\fl_menu_.h
+	"Fl_Widget.H"
+	"Fl_Menu_Item.H"
+
+1450199675 d:\include\fl\fl_menu_item.h
+	"Fl_Widget.H"
+	"Fl_Image.H"
+
+1450199675 d:\include\fl\fl_menu_button.h
+	"Fl_Menu_.H"
+
+1450199675 d:\include\fl\fl_preferences.h
+	<stdio.h>
+	"Fl_Export.H"
+
+1450199677 d:\include\fl\fl_tile.h
+	"Fl_Group.H"
+
+1450199673 d:\include\fl\fl_file_browser.h
+	"Fl_Browser.H"
+	"Fl_File_Icon.H"
+	"filename.H"
+
+1450199672 d:\include\fl\fl_browser.h
+	"Fl_Browser_.H"
+	"Fl_Image.H"
+
+1450199672 d:\include\fl\fl_browser_.h
+	"Fl_Group.H"
+	"Fl_Scrollbar.H"
+	<FL/Fl.H>
+
+1450199676 d:\include\fl\fl_scrollbar.h
+	"Fl_Slider.H"
+
+1450199676 d:\include\fl\fl_slider.h
+	"Fl_Valuator.H"
+
+1450199677 d:\include\fl\fl_valuator.h
+	"Fl_Widget.H"
+
+1450199673 d:\include\fl\fl_file_icon.h
+	"Fl.H"
+
+1450199678 d:\include\fl\filename.h
+	"/usr/include/dirent.h"
+	"Fl_Export.H"
+	<FL/filename.H>
+	<sys/types.h>
+	<direct.h>
+	<sys/types.h>
+	<dirent.h>
+
+1450199672 d:\include\fl\fl_box.h
+	"Fl_Widget.H"
+
+1450199673 d:\include\fl\fl_check_button.h
+	"Fl_Light_Button.H"
+
+1450199674 d:\include\fl\fl_light_button.h
+	"Fl_Button.H"
+
+1450199673 d:\include\fl\fl_file_input.h
+	<FL/Fl_Input.H>
+
+1450199678 d:\include\fl\fl_ask.h
+	"Enumerations.H"
+
+1450199675 d:\include\fl\fl_menu_bar.h
+	"Fl_Menu_.H"
+
+1450199677 d:\include\fl\fl_value_output.h
+	"Fl_Valuator.H"
+
+1454064170 source:d:\workspace\testplayer\fluid\testplayer.cxx
+	"TestPlayer.h"
+	<FL/Fl_Image.H>
+
+959326298 source:d:\workspace\testplayer\magic\magic.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<limits.h>
+	<assert.h>
+	<time.h>
+	"sysdep.h"
+	"magic.h"
+
+1450543923 d:\workspace\testplayer\magic\sysdep.h
+	<stdint.h>
+	<endian.h>
+	<machine/endian.h>
+
+959326454 d:\workspace\testplayer\magic\magic.h
+	"sysdep.h"
+
+959326259 source:d:\workspace\testplayer\magic\minifile.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"magic.h"
+
+1450438705 d:\include\sndfile.h
+	<stdio.h>
+	<stdint.h>
+	<sys/types.h>
+
+1450438922 d:\include\lame.h
+	<stddef.h>
+	<stdarg.h>
+	<stdio.h>
+
+1450199675 d:\include\fl\fl_output.h
+	"Fl_Input.H"
+
+1450199679 d:\include\fl\x.h
+	"Enumerations.H"
+	"win32.H"
+	"mac.H"
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xatom.h>
+	"Fl_Window.H"
+
+1450199679 d:\include\fl\win32.h
+	<windows.h>
+	<FL/Fl_Window.H>
+
+1450199679 d:\include\fl\mac.h
+	<FL/Fl_Widget.H>
+	<ApplicationServices/ApplicationServices.h>
+	"Fl_Window.H"
+	"../src/Fl_Font.H"
+
+1450049877 d:\workspace\testplayer\threads.h
+	<pthread.h>
+	<windows.h>
+	<process.h>
+	<process.h>
+
+1450438922 d:\include\lame\lame.h
+	<stddef.h>
+	<stdarg.h>
+	<stdio.h>
+
+1450199677 d:\include\fl\fl_value_input.h
+	"Fl_Valuator.H"
+	"Fl_Input.H"
+
+1450191456 d:\include\portaudio.h
+
+1450907574 d:\workspace\testplayer\mman.h
+	<_mingw.h>
+	<sys/types.h>
+
+1450907588 source:d:\workspace\testplayer\mmap.c
+	<windows.h>
+	<errno.h>
+	<io.h>
+	"mman.h"
+
+1452552721 d:\workspace\testplayer\mad_parser.h
+	"Fluid/TestPlayer.h"
+	<mad.h>
+	<portaudio.h>
+
+1453125742 source:d:\workspace\testplayer\mad_parser.cpp
+	"mad_parser.h"
+	<process.h>
+	<unistd.h>
+	"Fluid/PlayerGUI_prot.h"
+
+1451140351 d:\workspace\testplayer\fluid\myslider.h
+	<FL/Fl.H>
+	"PlayerGUI_prot.h"
+	<sndfile.h>
+	<FL/Fl_Double_Window.H>
+	<FL/Fl_Menu_Bar.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Value_Input.H>
+	<FL/Fl_Value_Output.H>
+	<FL/Fl_Slider.H>
+	<FL/Fl_Button.H>
+
+1452371921 d:\workspace\testplayer\fluid\myvalueslider.h
+	<FL/Fl.H>
+	<FL/Fl_Slider.H>
+	<FL/Fl_Value_Output.H>
+	<FL/Fl_Double_Window.H>
+	"PlayerGUI_prot.h"
+
+1453125992 source:d:\workspace\testplayer\fluid\myvalueslider.cxx
+	"MyValueSlider.h"
+	"../mad_parser.h"
+
+1095242252 d:\workspace\testplayer\fluid\multiplot.h
+	<sstream>
+	<float.h>
+	<time.h>
+	<math.h>
+	<vector>
+	<string>
+	<FL/Fl.H>
+	<FL/Fl_Gl_Window.H>
+	<FL/gl.h>
+
+1453177820 source:d:\workspace\testplayer\filters.c
+
+1454065254 d:\workspace\testplayer\filters.h
+	<stdio.h>
+

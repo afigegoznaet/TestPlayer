@@ -1,0 +1,415 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <FL/Fl_Chart.H>} {public local
+} 
+
+decl {\#include "PlayerGUI_prot.h"} {public local
+} 
+
+decl {\#include <sndfile.h>} {public local
+} 
+
+decl {\#include "MyValueSlider.h"} {public local
+} 
+
+class TestPlayerGui {open
+} {
+  Function {TestPlayerGui()} {open
+  } {
+    Fl_Window MainWindow {
+      label {Test Player} open
+      tooltip {Test Player} xywh {374 72 335 610} type Double box UP_BOX color 10 selection_color 61 labelfont 8 align 80 hide resizable size_range {0 0 335 0}
+    } {
+      Fl_Menu_Bar {} {
+        label Menu open
+        xywh {5 5 325 25} down_box DOWN_BOX labeltype ENGRAVED_LABEL labelfont 8
+      } {
+        Submenu {} {
+          label {&File} open
+          xywh {0 0 150 20} labeltype EMBOSSED_LABEL
+        } {
+          MenuItem {} {
+            label {&Open}
+            callback {load(this);}
+            xywh {0 0 150 20} labeltype ENGRAVED_LABEL labelfont 8
+          }
+          MenuItem {} {
+            label {&Exit}
+            callback {MainWindow->hide();}
+            xywh {0 0 30 20} labeltype ENGRAVED_LABEL
+          }
+        }
+        Submenu Settings {
+          label Settings open
+          xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+        } {
+          MenuItem {} {
+            label {No settings... yet}
+            xywh {0 0 100 20}
+          }
+        }
+        Submenu {} {
+          label Help open
+          xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+        } {
+          MenuItem {} {
+            label {No help... yet}
+            xywh {0 0 100 20}
+          }
+        }
+        MenuItem about {
+          label About
+          callback {showInfo(this);}
+          xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+        }
+      }
+      Fl_Group {} {
+        label {  File info} open
+        image {../Resources/Filter.png} xywh {0 50 669 562} labeltype ENGRAVED_LABEL align 5 when 1 resizable
+      } {
+        Fl_Group {} {
+          label {Text Fields} open
+          xywh {9 55 626 100} labeltype NO_LABEL
+        } {
+          Fl_Output fileName {
+            label File
+            callback {setFileName(this);}
+            tooltip {The name of the open file} xywh {15 60 305 25} color 55 labeltype NO_LABEL
+          }
+          Fl_Group {} {
+            label {File props} open
+            xywh {10 105 625 50} color 55 selection_color 55 labeltype NO_LABEL
+          } {
+            Fl_Value_Input currentPos {
+              label {Current position}
+              callback {setpos(this,TXTPOS)}
+              tooltip {Current Position in File} xywh {15 110 85 24} color 55 labeltype ENGRAVED_LABEL align 1
+              class Fl_Time_Output
+            }
+            Fl_Value_Output duration {
+              label Duration
+              tooltip {Current Position in File} xywh {125 110 85 24} color 55 selection_color 55 labeltype ENGRAVED_LABEL align 1
+              class Fl_Time_Output
+            }
+            Fl_Value_Output remaining {
+              label Remaining
+              tooltip {Current Position in File} xywh {235 110 85 24} color 55 labeltype ENGRAVED_LABEL align 1
+              class Fl_Time_Output
+            }
+          }
+        }
+        Fl_Slider slider {
+          label {slider:}
+          callback {setpos(this, SLID);}
+          tooltip {Set Playing duration in secs} xywh {15 140 305 20} type {Horz Knob} color 23 selection_color 4 labeltype NO_LABEL labelcolor 4 align 1 when 4
+          class MyValueSlider
+        }
+        Fl_Group {} {
+          label Buttons open
+          tooltip Controls xywh {15 170 500 25} labeltype NO_LABEL
+        } {
+          Fl_Button rewBut {
+            label {@<<}
+            callback {rew(this);}
+            tooltip Rewind xywh {15 170 50 22} down_box DOWN_BOX color 54 selection_color 14
+          }
+          Fl_Button startBut {
+            label {@>}
+            callback {play(this);}
+            tooltip Play xywh {75 170 90 22} down_box DOWN_BOX color 54 selection_color 14
+          }
+          Fl_Button stopBut {
+            label {@square}
+            callback {stop(this);}
+            tooltip Stop xywh {175 170 85 22} down_box DOWN_BOX color 54 selection_color 14 labeltype EMBOSSED_LABEL
+          }
+          Fl_Button ffBut {
+            label {@>>}
+            callback {ff(this);}
+            tooltip {Fast Forward} xywh {270 170 50 22} down_box DOWN_BOX color 54 selection_color 14
+          }
+        }
+        Fl_Slider volumeSlider {
+          label {volume:}
+          callback {setVolume(this);}
+          xywh {15 270 305 20} type {Horz Knob} box GTK_THIN_DOWN_BOX color 23 selection_color 63 minimum 1 maximum 11 step 0.01 value 11
+        }
+        Fl_Button procToggle {
+          callback {toggleProcWindow(this);}
+          image {../Resources/spec.png} xywh {15 200 65 65} type Toggle down_box DOWN_BOX color 7 selection_color 14
+        }
+        Fl_Group {} {open
+          xywh {0 310 335 300} resizable
+        } {
+          Fl_Box {} {
+            label Placeholder
+            xywh {0 310 335 300} box DOWN_BOX color 7
+          }
+          Fl_Scrollbar {} {
+            xywh {315 311 20 299} color 10 selection_color 108 labeltype NO_LABEL
+          }
+        }
+        Fl_Button filtOpen {
+          callback {filtersWindow->show();}
+          image {../Resources/Filter.png} xywh {85 200 65 65} down_box DOWN_BOX color 7 selection_color 14
+        }
+      }
+    }
+    Fl_Window processingWindow {
+      label Processing
+      callback {setButton(this);}
+      xywh {718 72 610 490} type Double color 10 hide
+    } {
+      Fl_Group specBox {
+        label {In/Out Spectra} open
+        xywh {5 30 600 455} box GTK_UP_BOX color 108 labelfont 1
+      } {
+        Fl_Box inputSpectraL {
+          label Chart
+          xywh {10 35 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra0 {
+          label Chart
+          xywh {10 125 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box inputSpectraR {
+          label Chart
+          xywh {310 35 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra1 {
+          label Chart
+          xywh {310 125 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra2 {
+          label Chart
+          xywh {10 215 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra3 {
+          label Chart
+          xywh {310 215 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra4 {
+          label Chart
+          xywh {10 305 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra5 {
+          label Chart
+          xywh {310 305 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra6 {
+          label Chart
+          xywh {10 395 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+        Fl_Box outputSpectra7 {
+          label Chart
+          xywh {310 395 290 85} box DOWN_BOX color 55 labeltype NO_LABEL
+          class Fl_Chart
+        }
+      }
+    }
+    Fl_Window infoWindow {
+      label Info
+      xywh {592 193 380 340} type Single color 10 hide modal
+    } {
+      Fl_Text_Display infoText {
+        xywh {0 0 380 310}
+      }
+      Fl_Button okButton {
+        label Ok
+        callback {this->infoWindow->hide();}
+        xywh {135 315 100 20} down_box DOWN_BOX selection_color 48 hotspot
+      }
+    }
+    Fl_Window filtersWindow {
+      label Filters
+      xywh {49 64 710 305} type Double box UP_BOX color 10 hide modal
+    } {
+      Fl_Button okFiltButton {
+        label Close
+        callback {this->filtersWindow->hide();}
+        xywh {305 255 100 20} down_box DOWN_BOX selection_color 48 hotspot
+      }
+      Fl_Button leftOpen {
+        label Left
+        callback {openFiltWindow(this, LEFT);}
+        image {../Resources/Filter.png} xywh {60 55 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button middleLeftOpen {
+        label {Middle Left}
+        callback {openFiltWindow(this, MIDDLE_LEFT);}
+        image {../Resources/Filter.png} xywh {410 160 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button rightOpen {
+        label Right
+        callback {openFiltWindow(this, RIGHT);}
+        image {../Resources/Filter.png} xywh {235 55 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button rearLeftOpen {
+        label {Rear Left}
+        callback {openFiltWindow(this, REAR_LEFT);}
+        image {../Resources/Filter.png} xywh {410 55 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button rearRightOpen {
+        label {Rear Right}
+        callback {openFiltWindow(this, REAR_RIGHT);}
+        image {../Resources/Filter.png} xywh {585 55 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button middleRightOpen {
+        label {Middle Right}
+        callback {openFiltWindow(this, MIDDLE_RIGHT);}
+        image {../Resources/Filter.png} xywh {585 160 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button centerOpen {
+        label Center
+        callback {openFiltWindow(this, CENTER);}
+        image {../Resources/Filter.png} xywh {60 160 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Button subwooferOpen {
+        label Subwoofer
+        callback {openFiltWindow(this, SUBWOOFER);}
+        image {../Resources/Filter.png} xywh {235 160 65 65} down_box DOWN_BOX color 7 selection_color 14 labelfont 1 align 513
+      }
+      Fl_Box filtLabel {
+        label {   Available output channels:}
+        xywh {0 0 710 23} labelfont 1
+      }
+    }
+    Fl_Window filtConfigWindow {
+      label {Filter config} open
+      xywh {694 166 320 300} type Double box UP_BOX color 10 resizable modal visible
+    } {
+      Fl_Choice inputChan {
+        label {Input Channel} open
+        xywh {25 25 105 25} down_box BORDER_BOX align 1
+      } {}
+      Fl_Choice filterChoice {
+        label {Filter Type} open
+        xywh {190 25 105 25} down_box BORDER_BOX align 1
+      } {}
+      Fl_Slider cutOff {
+        label {Cutoff frequency:}
+        callback {setFreq(this);}
+        xywh {25 75 270 25} type {Horz Knob} color 23 selection_color 1 align 1 minimum 20 maximum 20000 step 1 value 20
+      }
+      Fl_Button okFiltConfigButton {
+        label Apply
+        callback {setFilt(this);}
+        xywh {110 265 100 20} down_box DOWN_BOX selection_color 48 hotspot
+      }
+      Fl_Box data {
+        label 0
+        xywh {150 15 25 25} labeltype NO_LABEL hide
+      }
+      Fl_Slider bandWidth {
+        label {Bandwidth:}
+        callback {setFreq(this);}
+        xywh {25 130 270 25} type {Horz Knob} color 23 selection_color 1 align 1 maximum 20000 step 1
+      }
+      Fl_Group {} {open
+        xywh {0 161 320 98} resizable
+      } {
+        Fl_Box respChart {
+          label {Frequency response}
+          xywh {25 190 125 70} box UP_BOX color 7 align 1
+          class Fl_Chart
+        }
+        Fl_Box phaseChart {
+          label {Phase Response}
+          xywh {180 190 125 70} box UP_BOX color 7 align 1
+          class Fl_Chart
+        }
+      }
+    }
+    code {isPlaying = false;
+isStopped = false;
+filename[0] = '\\0';
+fc = new Fl_File_Chooser(".", "*", Fl_File_Chooser::SINGLE, "Open Audio File");
+libToUse=0;
+FILE* iniFile;
+iniFile = fopen("./settings.ini","r");
+memset(inputData, 0, 2*1152*sizeof(int));
+//memset(outputData, 0, 2048*sizeof(int));
+if(iniFile)
+	fread(currDir, 1024, 1,iniFile);
+else
+	memset(currDir, 0, 1024);
+fclose(iniFile);
+      Fl_Text_Buffer* buffer=new Fl_Text_Buffer();
+      buffer->insert(0, "    Developed as part of master thesis by\\n"
+  					"    Roman Postanciuc\\n"
+  					"    2016 ");
+	infoText->buffer(buffer);
+	infoText->wrap_mode(3 , 0);
+	inputBusyFlag=false;
+	continueDecoding=true;
+  	filterChoice->add("No Output");
+  	filterChoice->add("No Filtering");
+	filterChoice->add("Low Pass");
+	filterChoice->add("High Pass");
+	filterChoice->add("Band Pass");
+	filterChoice->add("Band Reject");
+	filterChoice->value(0);
+	
+	respChart->type(FL_LINE_CHART);
+	phaseChart->type(FL_LINE_CHART);
+	respChart->maxsize(512);
+	phaseChart->maxsize(512);
+	respChart->bounds(-1, 1);
+	phaseChart->bounds(-1*M_PI, M_PI);
+	int i;
+	for (i=0;i<512;i++){
+		respChart->add(0,0,0);
+		phaseChart->add(0,0,0);
+	}} {selected
+    }
+  }
+  Function {~TestPlayerGui()} {open
+  } {
+    code {delete fc;} {}
+  }
+  Function {show()} {open
+  } {
+    code {MainWindow->show();} {}
+  }
+  decl {bool isPlaying;} {public local
+  }
+  decl {bool isStopped;} {public local
+  }
+  decl {char filename[256];} {public local
+  }
+  decl {Fl_File_Chooser *fc;} {public local
+  }
+  decl {double ffStep;} {public local
+  }
+  decl {SNDFILE *fin;} {public local
+  }
+  decl {SF_INFO input_info;} {public local
+  }
+  decl {short libToUse;} {public local
+  }
+  decl {unsigned long length;} {public local
+  }
+  decl {char currDir[1024];} {public local
+  }
+  decl {int inputData[2][1152];} {public local
+  }
+  decl {boolean inputBusyFlag;} {public local
+  }
+  decl {int **outputData;} {public local
+  }
+  decl {boolean outputBusyFlag;} {public local
+  }
+  decl {boolean continueDecoding;} {public local
+  }
+} 
